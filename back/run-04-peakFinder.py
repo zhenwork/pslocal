@@ -19,5 +19,5 @@ pf.noe = args.noe
 command = pf.getCommand()
 print " #####\n", command, "\n ######"
 
-process = subprocess.Popen(, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
+process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
 out, err = process.communicate()
