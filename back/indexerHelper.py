@@ -5,7 +5,7 @@ import os
 
 def indexCommand(experimentName=None, runNumber=None, detectorName=None, geomfile=None, outDir=None, \
                  queue=None, pixelSize=None, instrument=None, coffset=None, clenEpics=None, \
-                 peakMethod='cxi', intRadius='3,4,5', indexingMethod='dirax', minPeaks=15, \
+                 peakMethod='cxi', intRadius='3,4,5', indexingMethod='mosflm,dirax', minPeaks=15, \
                  maxPeaks=2048, minRes=-1, tolerance='5,5,5,1.5', tag="", pkTag="", \
                  indexsample='crystal', chunkSize=200, indexnoe=-1, logger='False', \
                  keepData='True', likelihood=0, pdbfile=None):
@@ -157,7 +157,7 @@ class IndexHelper:
                            detectorName=self.detectorName, geomfile=geoManager.geomfile, \
                            outDir=self.outDir, queue=self.queue, pixelSize=self.pixelSize, \
                            instrument=self.instrument, coffset=geoManager.coffset, clenEpics=self.clenEpics, \
-                           tag=self.tag, pkTag = self.pkTag, pdbfile=self.pdbfile)
+                           tag=self.tag, pkTag = self.pkTag, pdbfile=self.pdbfile, indexnoe=self.noe)
         
         return cmd 
         
