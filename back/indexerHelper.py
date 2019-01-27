@@ -1,7 +1,7 @@
 import numpy as np 
 import copy 
 from expParams import experiparams
-
+import os
 
 def indexCommand(experimentName=None, runNumber=None, detectorName=None, geomfile=None, outDir=None, \
                  queue=None, pixelSize=None, instrument=None, coffset=None, clenEpics=None, \
