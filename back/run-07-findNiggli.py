@@ -17,12 +17,12 @@ args.pdb = args.pdb in ["true", "yes", '1']
 for streamfile in out:
     if not os.path.isfile(streamfile):
         continue
-    indexHistogram = ei.getIndexHistogram(streamfile)
+    numIndex, numHits, indexHistogram = ei.getIndexHistogram(streamfile)
     lattice = indexHistogram[:,9:15].copy() 
 
     print "##### streamfile: ", streamfile
     print "##### with pdb? ", args.pdb
-    print "##### numIndex: ", len(lattice) 
+    print "##### numIndex/numHits: ", len(lattice),'/',numHits 
     if args.pdb:
         lattice = ei.convert2niggli(lattice)
         [lattice, Volume] = volumeFilter(lattice)

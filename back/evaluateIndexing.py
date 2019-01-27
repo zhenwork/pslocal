@@ -19,9 +19,11 @@ def getIndexHistogram(streamfile):
     sm.initial(streamfile)
     sm.get_label()
     sm.get_info()
+    numHits = len(sm.label.hit)
+    numIndex = len(sm.label.index)
     indexHistogram = sm.crystal
     sm.clear()    
-    return indexHistogram
+    return numIndex, numHits, indexHistogram
 
 
 def scoreIndexing(skewness, kurtosis, numIndex=None):
@@ -132,18 +134,19 @@ def convert2niggli(_lattice):
 
 def evaluateIndexing(streamfile, withpdb=True):
     
-    indexHistogram = getIndexHistogram(streamfile)
+    numIndex, numHits, indexHistogram = getIndexHistogram(streamfile)
     lattice = indexHistogram[:,9:15].copy()
-    print "##### numIndex: ", len(lattice)
+    print "##### numHits : ", numHits
+    print "##### numIndex: ", len(lattice), numIndex
     if not withpdb:
         print "##### running niggli and volume filter"
     	lattice = convert2niggli(lattice)
         [lattice, Volume] = volumeFilter(lattice)
 
     skewness, kurtosis = evaluateSkewKurt(lattice[:,0], lattice[:,1], lattice[:,2], lattice[:,3], lattice[:,4], lattice[:,5])
-    print "##### skewness: ", skewness 
-    print "##### kurtosis: ", kurtosis
-    score = scoreIndexing(skewness, kurtosis)
+    print "##### skewness: ", np.around(skewness,3) 
+    print "##### kurtosis: ", np.around(kurtosis,3)
+    score = scoreIndexing(skewness, kurtosis, indexRate=numIndex*1.0/numHits)
     
     return score
     
