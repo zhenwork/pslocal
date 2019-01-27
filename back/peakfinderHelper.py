@@ -8,7 +8,7 @@ class peakFinderHelper:
 
 
     def setDefaultParams(self):
-        params = experiparams(experimentName=self.experimentName, runNumber=self.runNumber)
+        params = experiparams(self.experimentName, self.runNumber, detectorName=self.detectorName)
         params.setDefaultPsana()
         
         self.queue = 'psanaq'
