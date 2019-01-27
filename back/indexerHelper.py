@@ -58,6 +58,7 @@ class GeoFileManager:
         self.detectorDistance = self.params.detectorDistance
         self.coffset = self.params.coffset
         self.clen = self.params.clen 
+        self.geomfile = self.params.cxiDir + "/.temp.geom"
 
     def changeCenter(self, fromfile=None, newCenter=None, tofile=None):
         if tofile is None:
