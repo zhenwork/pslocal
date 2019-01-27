@@ -150,7 +150,7 @@ def findCenterPowderSum(_powderImg, _mask=None):
     print("Guess centre: ", guessCx, guessCy)
 
     optimalCx, optimalCy = findDetectorCentre(powderImg, guessCx, guessCy, _range=50)
-    print("Optimum centre along row,centre along column: ", centreRow, centreCol)
+    print("Optimum centre along row,centre along column: ", optimalCx, optimalCy)
     
     return (optimalCx, optimalCy)
 
@@ -180,6 +180,7 @@ def deployCenter(experimentName, runNumber, detectorName, newCx, newCy):
     psanaCx, psanaCy = det.point_indexes(evt, pxy_um=(0, 0))
     pixelSize = det.pixel_size(evt)
 
+    print "##### current psana center: ", psanaCx, psanaCy
 
     dx = pixelSize * (psanaCx - newCx)  # microns
     dy = pixelSize  * (psanaCy - newCy)  # microns
