@@ -24,11 +24,6 @@ if args.distance is not None:
         indH.pdbfile = args.pdb 
         command = indH.indexCommand(geoM)
         print " #####\n", command, "\n ######"
-"""
-        process = subprocess.Popen(shlex.split(cmd))
-        #process.communicate()
-        jobname = params.experimentName + "_" + str(params.runNumber) + "*" + params.tag
-"""
 else:
     geoM = indexerHelper.GeoFileManager(experimentName=args.exp,runNumber=args.run,detectorName=args.det)
     indH = indexerHelper.IndexHelper(experimentName, runNumber, detectorName)
@@ -38,3 +33,8 @@ else:
     command = indH.indexCommand(geoM)
     print " #####\n", command, "\n ######"
 
+"""
+    process = subprocess.Popen(shlex.split(cmd))
+    #process.communicate()
+    jobname = params.experimentName + "_" + str(params.runNumber) + "*" + params.tag
+"""
