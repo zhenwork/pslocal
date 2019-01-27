@@ -26,7 +26,7 @@ def getIndexHistogram(streamfile):
     return numIndex, numHits, indexHistogram
 
 
-def scoreIndexing(skewness, kurtosis, numIndex=None):
+def scoreIndexing(skewness, kurtosis, indexRate=None):
     """
     1. Higher score means better distribution;
     2. Score can be negative;
@@ -38,7 +38,7 @@ def scoreIndexing(skewness, kurtosis, numIndex=None):
     score = -999.
     if skewness is None or kurtosis is None:
         return [score]*6  
-    score = kurtosis/4. - np.abs(skewness)
+    score = kurtosis/2. - np.abs(skewness) + indexRate*20.
     return score 
 
 
