@@ -161,6 +161,7 @@ def setupNewRun(experimentName=None, runNumber=None, detectorName=None, copyRun=
             copyfile(src=copyParams.cxiDir+'/staticMask.h5', dst=params.cxiDir+'/staticMask.h5')
             copyfile(src=copyParams.cxiDir+'/psanaMask.npy', dst=params.cxiDir+'/psanaMask.npy')
             copyfile(src=copyParams.cxiDir+"/.temp.geom", dst=params.cxiDir+"/.temp.geom")
+            copyfile(src=copyParams.cxiDir+"/.temp.geom", dst=params.cxiDir+"/temp.geom")
             print "##### copy file from run %d to %d" % (copyRun, runNumber)
             return True
 
