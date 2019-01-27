@@ -24,11 +24,11 @@ for streamfile in out:
     print "##### with pdb? ", args.pdb
     print "##### numIndex: ", len(lattice) 
     if args.pdb:
-	    lattice = convert2niggli(lattice)
-	    [lattice, Volume] = volumeFilter(lattice)
-	    print "##### numIndex after filter: ", len(lattice)
+        lattice = convert2niggli(lattice)
+        [lattice, Volume] = volumeFilter(lattice)
+        print "##### numIndex after filter: ", len(lattice)
 
-	nuc = np.nanmean(lattice,axis=0).reshape((1,6))
-	nuc = convert2niggli(nuc).ravel()
-	print "##### niggli cell: ", nuc
+    nuc = np.nanmean(lattice,axis=0).reshape((1,6))
+    nuc = convert2niggli(nuc).ravel()
+    print "##### niggli cell: ", nuc
 
