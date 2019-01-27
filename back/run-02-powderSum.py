@@ -111,8 +111,10 @@ def runclient(args):
 			mean_img = (mean_img * counter + img)*1.0/(counter+1)
 			median_img = utils.guessStreamMedian(median_img, img) 
 		counter += 1
+
+		print "##### Rank %3d is processing event %3d/%d" % (comm_rank, nevent, args.noe)
 			
-	print "##### Rank %3d processed %d/%d" % (comm_rank, counter, args.noe)
+	print "##### Rank %3d processed %3d/%d" % (comm_rank, counter, args.noe)
 	md=mpidata()
 	md.addarray('max_img', max_img)	  
 	md.addarray('mean_img', mean_img) 
