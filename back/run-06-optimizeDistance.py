@@ -18,3 +18,5 @@ for streamfile in out:
 	print "##### streamfile: ", streamfile
 	score = ei.evaluateIndexing(streamfile, withpdb=bool(args.pdb))
 	print "##### score: ", np.sum(score[:3]), np.sum(score[3:]), np.sum(score), score,'\n\n'
+
+	

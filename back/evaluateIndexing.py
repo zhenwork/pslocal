@@ -35,7 +35,7 @@ def scoreIndexing(skewness, kurtosis, numIndex=None):
     
     score = -999.
     if skewness is None or kurtosis is None:
-        return score  
+        return [score]*6  
     score = kurtosis/4. - np.abs(skewness)
     return score 
 
