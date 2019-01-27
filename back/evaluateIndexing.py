@@ -1,4 +1,4 @@
-import scipy
+from scipy import stats
 import numpy as np 
 from streamManager import *
 
@@ -48,19 +48,19 @@ def evaluateSkewKurt(a,b,c,alpha,beta,gamma):
 	if len(a) < 50:
 		return None, None
 	
-	skewness[0] = scipy.stats.skew(a)
-	skewness[1] = scipy.stats.skew(b)
-	skewness[2] = scipy.stats.skew(c)
-	skewness[3] = scipy.stats.skew(alpha)
-	skewness[4] = scipy.stats.skew(beta)
-	skewness[5] = scipy.stats.skew(gamma)
+	skewness[0] = stats.skew(a)
+	skewness[1] = stats.skew(b)
+	skewness[2] = stats.skew(c)
+	skewness[3] = stats.skew(alpha)
+	skewness[4] = stats.skew(beta)
+	skewness[5] = stats.skew(gamma)
 	
-	kurtosis[0] = scipy.stats.kurtosis(a)
-	kurtosis[1] = scipy.stats.kurtosis(b)
-	kurtosis[2] = scipy.stats.kurtosis(c)
-	kurtosis[3] = scipy.stats.kurtosis(alpha)
-	kurtosis[4] = scipy.stats.kurtosis(beta)
-	kurtosis[5] = scipy.stats.kurtosis(gamma)
+	kurtosis[0] = stats.kurtosis(a)
+	kurtosis[1] = stats.kurtosis(b)
+	kurtosis[2] = stats.kurtosis(c)
+	kurtosis[3] = stats.kurtosis(alpha)
+	kurtosis[4] = stats.kurtosis(beta)
+	kurtosis[5] = stats.kurtosis(gamma)
 	
 	return np.array(skewness), np.array(kurtosis)
 
