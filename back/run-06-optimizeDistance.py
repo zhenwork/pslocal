@@ -14,6 +14,6 @@ out = out.split('\n')
 for streamfile in out:
 	if not os.path.isfile(streamfile):
 		continue
+	print "##### streamfile: ", streamfile
 	score = ei.evaluateIndexing(streamfile)
-	print "streamfile: ", streamfile
-	print "score: ", np.sum(score[:3]), np.sum(score[3:]), np.sum(score), score
+	print "##### score: ", np.sum(score[:3]), np.sum(score[3:]), np.sum(score), score,'\n\n'
