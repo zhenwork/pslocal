@@ -70,9 +70,7 @@ class GeoFileManager:
         if fromfile is None:
             fromfile = self.params.cxiDir + "/.temp.geom"
         if tofile is None:
-            tofile = fromfile + "-newCoffset-"+str(newCoffset)
-        if fromfile is None:
-            fromfile = self.geomfile
+            tofile = fromfile + "-newCoffset-"+str(newCoffset) 
             
         f = open(fromfile, 'r')
         content = f.readlines()
@@ -103,9 +101,7 @@ class GeoFileManager:
         if fromfile is None:
             fromfile = self.params.cxiDir + "/.temp.geom"
         if tofile is None:
-            tofile = fromfile + "-newDistance-"+str(newDistance)
-        if fromfile is None:
-            fromfile = self.geomfile
+            tofile = fromfile + "-newDistance-"+str(newDistance) 
 
         print "##### old geom: ", fromfile
         print "##### old params: distance=%f / coffset=%f / clen=%f"%(self.detectorDistance, self.coffset, self.clen) 

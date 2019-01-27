@@ -28,8 +28,9 @@ if args.distance is not None:
         indH = None
 else:
     geoM = indexerHelper.GeoFileManager(experimentName=args.exp,runNumber=args.run,detectorName=args.det)
+    geoM.changeDistance(geoM.detectorDistance)
     indH = indexerHelper.IndexHelper(args.exp, args.run, args.det)
-    indH.pkTag = args.pkTag
+    indH.pkTag = args.pkTag 
     indH.indexnoe = args.noe 
     indH.pdbfile = args.pdb 
     command = indH.indexCommand(geoM)
