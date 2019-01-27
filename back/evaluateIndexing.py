@@ -22,6 +22,7 @@ def getIndexHistogram(streamfile):
     numHits = len(sm.label.hit)
     numIndex = len(sm.label.index)
     indexHistogram = sm.crystal
+    indexHistogram[:,9:12] *= 10.
     sm.clear()    
     return numIndex, numHits, indexHistogram
 
