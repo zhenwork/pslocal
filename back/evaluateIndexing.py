@@ -47,12 +47,12 @@ def evaluateSkewKurt(a,b,c,alpha,beta,gamma):
 	if len(a) < 50:
 		return None, None
 	
-	skewness[0] = np.abs(scipy.stats.skew(a))
-	skewness[1] = np.abs(scipy.stats.skew(b))
-	skewness[2] = np.abs(scipy.stats.skew(c))
-	skewness[3] = np.abs(scipy.stats.skew(alpha))
-	skewness[4] = np.abs(scipy.stats.skew(beta))
-	skewness[5] = np.abs(scipy.stats.skew(gamma))
+	skewness[0] = scipy.stats.skew(a)
+	skewness[1] = scipy.stats.skew(b)
+	skewness[2] = scipy.stats.skew(c)
+	skewness[3] = scipy.stats.skew(alpha)
+	skewness[4] = scipy.stats.skew(beta)
+	skewness[5] = scipy.stats.skew(gamma)
 	
 	kurtosis[0] = scipy.stats.kurtosis(a)
 	kurtosis[1] = scipy.stats.kurtosis(b)
@@ -74,10 +74,12 @@ def volumeFilter(lattice):
 def evaluateIndexing(streamfile):
 	
 	indexHistogram = getIndexHistogram(streamfile)
-	lattice = indexHistogram[9:15].copy()
+	lattice = indexHistogram[:,9:15].copy()
 	
 	skewness, kurtosis = evaluateSkewKurt(lattice[:,0], lattice[:,1], lattice[:,2], lattice[:,3], lattice[:,4], lattice[:,5])
-	
+	print "##### numIndex: ", len(lattice)
+	print "##### skewness: ", skewness 
+	print "##### kurtosis: ", kurtosis
 	score = scoreIndexing(skewness, kurtosis)
 	
 	return score
