@@ -1,0 +1,40 @@
+import indexerHelper as indexerHelper
+import subprocess 
+import argparse
+parser = argparse.ArgumentParser()
+parser.add_argument("-exp", "--exp", help="experiment name", default="", type=str)
+parser.add_argument("-run", "--run", help="run number", default=-1, type=int)
+parser.add_argument("-det", "--det", help="detector alias (e.g. DscCsPad)", default="DscCsPad", type=str) 
+parser.add_argument("-pkTag", "--pkTag", help="tag of cxi file", default="", type=str) 
+parser.add_argument("-noe", "--noe", help="number of images", default=-1, type=int)
+parser.add_argument("-distance", "--distance", help="distance + or - in mm", default=None, type=str)
+parser.add_argument("-pdb", "--pdb", help="pdb", default=None, type=str)
+args = parser.parse_args()
+
+
+if args.distance is not None:
+    args.distance = args.distance.split(',') 
+    for detectorDistanceString in detectorDistanceList:
+        geoM = indexerHelper.GeoFileManager(experimentName=args.exp,runNumber=args.run,detectorName=args.det)
+        detectorDistance = geoM.detectorDistance + float(detectorDistanceString)*1.0e-3
+        geoM.changeDistance(self, detectorDistance)
+        indH = indexerHelper.IndexHelper(experimentName, runNumber, detectorName)
+        indH.pkTag = args.pkTag
+        indH.indexnoe = args.noe 
+        indH.pdbfile = args.pdb 
+        command = indH.indexCommand(geoM)
+        print " #####\n", command, "\n ######"
+"""
+        process = subprocess.Popen(shlex.split(cmd))
+        #process.communicate()
+        jobname = params.experimentName + "_" + str(params.runNumber) + "*" + params.tag
+"""
+else:
+    geoM = indexerHelper.GeoFileManager(experimentName=args.exp,runNumber=args.run,detectorName=args.det)
+    indH = indexerHelper.IndexHelper(experimentName, runNumber, detectorName)
+    indH.pkTag = args.pkTag
+    indH.indexnoe = args.noe 
+    indH.pdbfile = args.pdb 
+    command = indH.indexCommand(geoM)
+    print " #####\n", command, "\n ######"
+
