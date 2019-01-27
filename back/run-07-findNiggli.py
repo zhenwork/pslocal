@@ -31,5 +31,5 @@ for streamfile in out:
     nuc = np.nanmean(lattice,axis=0).reshape((1,6))
     print "##### average cell: ", np.around(nuc,3)
     nuc = ei.convert2niggli(nuc).ravel()
-    print "##### niggli cell: ", np.around(nuc,3)
+    print "##### niggli cell: ", np.around(nuc,3), "\n\n"
 
