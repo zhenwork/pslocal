@@ -69,7 +69,7 @@ class peakFinderHelper:
             " --mask " + str(self.staticMask) + \
             " --userMask_path " + str(self.userMask) + \
             " --noe " + str(self.noe) + \
-            " --clen " + str(self.clenEpics) + \
+            " --clen " + str(self.clen) + \
             " --coffset " + str(self.coffset) + \
             " --minPeaks " + str(self.minPeaks) + \
             " --maxPeaks " + str(self.maxPeaks) + \
