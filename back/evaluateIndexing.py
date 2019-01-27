@@ -38,7 +38,7 @@ def scoreIndexing(skewness, kurtosis, indexRate=None):
     score = -999.
     if skewness is None or kurtosis is None:
         return [score]*6  
-    score = kurtosis/2. - np.abs(skewness) + indexRate*20.
+    score = kurtosis/2. - np.abs(skewness) + indexRate*10.
     return score 
 
 
@@ -137,7 +137,7 @@ def evaluateIndexing(streamfile, withpdb=True):
     numIndex, numHits, indexHistogram = getIndexHistogram(streamfile)
     lattice = indexHistogram[:,9:15].copy()
     print "##### numHits : ", numHits
-    print "##### numIndex: ", len(lattice), numIndex
+    print "##### numIndex: ", len(lattice)
     if not withpdb:
         print "##### running niggli and volume filter"
     	lattice = convert2niggli(lattice)
