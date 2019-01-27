@@ -152,15 +152,12 @@ class IndexHelper:
 
 
     def indexCommand(self, geoManager):
-        self.tag = "index-distance-"+str(round(params.detectorDistance*1000., 2)) 
-        
-        geoManager = GeoFileManager(self.geomfile)
-        geoManager.changeCoffset(newCoffset=params.coffset)
+        self.tag = "index-distance-"+str(round(geoManager.detectorDistance*1000., 2)) 
         
         cmd = indexCommand(experimentName=self.experimentName, runNumber=self.runNumber, \
                            detectorName=self.detectorName, geomfile=geoManager.geomfile, \
                            outDir=self.outDir, queue=self.queue, pixelSize=self.pixelSize, \
-                           instrument=self.instrument, coffset=self.coffset, clenEpics=self.clenEpics, \
+                           instrument=self.instrument, coffset=geoManager.coffset, clenEpics=self.clenEpics, \
                            tag=self.tag, pkTag = self.pkTag, pdbfile=self.pdbfile)
         
         return cmd 
