@@ -5,4 +5,4 @@ parser.add_argument("-stream", "--stream", help="stream file", default=None, typ
 args = parser.parse_args()
 
 score = ei.evaluateIndexing(args.stream)
-print score
+print score, np.sum(score[:3])
