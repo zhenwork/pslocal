@@ -141,7 +141,8 @@ class IndexHelper:
         params.setDefaultPsana()
         
         self.queue = 'psanaq' 
-        self.outDir = params.cxiDir
+        ### TODO: psocake accept former directory as outDir
+        self.outDir = params.outDir
         self.indexnoe = -1
         self.pkTag = ""
         self.instrument = params.instrument
