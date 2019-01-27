@@ -1,4 +1,5 @@
 import os
+import numpy as np
 import subprocess
 import evaluateIndexing as ei 
 import argparse
@@ -15,4 +16,4 @@ for streamfile in out:
 		continue
 	score = ei.evaluateIndexing(streamfile)
 	print "streamfile: ", streamfile
-	print "score: ", np.sum(score[:3]), score
+	print "score: ", np.sum(score[:3]), np.sum(score[3:]), np.sum(score), score

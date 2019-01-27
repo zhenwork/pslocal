@@ -74,7 +74,7 @@ class iStream:
 		self.label.status = False
 		
 	def get_label_alg2(self):	
-		print 'getting label (alg=2)'
+		#print 'getting label (alg=2)'
 		FinLabel = []
 		FinLabelall = []
 		tmpLabel = [[] for x in self.label.id]
@@ -130,7 +130,7 @@ class iStream:
 
 
 	def get_label_alg1(self):
-		print 'getting label (alg=1)'
+		#print 'getting label (alg=1)'
 		tmpCount = []
 		tmpLabel = []
 		for i, val in enumerate(self.content):
