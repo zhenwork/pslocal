@@ -147,7 +147,7 @@ def convertCalibFile(calibFile, fsave):
     return True
 
 
-def setupNewRun(experimentName, runNumber, detectorName=None, copyRun=None):
+def setupNewRun(experimentName=None, runNumber=None, detectorName=None, copyRun=None):
 
     params = experiparams(experimentName=experimentName, runNumber=runNumber, detectorName=detectorName)
     copyParams = experiparams(experimentName=experimentName, runNumber=copyRun, detectorName=detectorName)
