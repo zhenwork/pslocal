@@ -136,6 +136,7 @@ def evaluateIndexing(streamfile, withpdb=True):
     lattice = indexHistogram[:,9:15].copy()
     print "##### numIndex: ", len(lattice)
     if not withpdb:
+        print "##### running niggli and volume filter"
     	lattice = convert2niggli(lattice)
         [lattice, Volume] = volumeFilter(lattice)
 
