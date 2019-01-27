@@ -151,6 +151,8 @@ def setupNewRun(experimentName=None, runNumber=None, detectorName=None, copyRun=
 
     params = experiparams(experimentName=experimentName, runNumber=runNumber, detectorName=detectorName)
     copyParams = experiparams(experimentName=experimentName, runNumber=copyRun, detectorName=detectorName)
+    if not os.path.isdir(params.cxiDir):
+        os.makedirs(params.cxiDir)
 
     if copyRun is not None:
         status = checkStartFiles(experimentName, copyRun)
