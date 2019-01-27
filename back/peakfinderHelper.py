@@ -16,7 +16,6 @@ class peakFinderHelper:
         self.ncpus = 32
         self.outDir = params.cxiDir
         self.logFile = params.cxiDir+"/.%J.log"
-        self.algorithm = 2
         self.noe = -1
 
         ## peak finder algorithm params
@@ -87,10 +86,12 @@ class peakFinderHelper:
 
 
     def setAdaptiveMode(self):
+    	self.algorithm = 2
         self.alg_npix_min = 2
         self.alg_npix_max = 30
-        self.alg_atot_thr = 1000
-        self.alg_son_min = 9
+        self.alg_amax_thr = 100
+        self.alg_atot_thr = 300
+        self.alg_son_min = 7
         self.alg1_thr_low = 0.
         self.alg1_thr_high = 0.
         self.alg1_rank = 3
@@ -99,16 +100,7 @@ class peakFinderHelper:
         
         
     def setDropletMode(self):
-        self.alg_npix_min = 2.0    
-        self.alg_npix_max = 20.0 
-        self.alg_amax_thr = 0.0    ## not used in the adaptive mode
-        self.alg_atot_thr = 2500.0
-        self.alg_son_min = 7.0
-        self.alg1_thr_low = 400.0
-        self.alg1_thr_high = 600.0
-        self.alg1_rank = 2
-        self.alg1_radius = 2
-        self.alg1_dr = 1    
+        return
 
 
         
