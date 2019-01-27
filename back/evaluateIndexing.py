@@ -107,7 +107,7 @@ def evaluateIndexing(streamfile, withpdb=True):
     lattice = indexHistogram[:,9:15].copy()
     print "##### numIndex: ", len(lattice)
     if not withpdb:
-        lattice = volumeFilter(lattice)
+        [lattice, Volume] = volumeFilter(lattice)
 
     skewness, kurtosis = evaluateSkewKurt(lattice[:,0], lattice[:,1], lattice[:,2], lattice[:,3], lattice[:,4], lattice[:,5])
     print "##### skewness: ", skewness 
