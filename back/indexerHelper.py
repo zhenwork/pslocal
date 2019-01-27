@@ -157,7 +157,7 @@ class IndexHelper:
                            detectorName=self.detectorName, geomfile=geoManager.geomfile, \
                            outDir=self.outDir, queue=self.queue, pixelSize=self.pixelSize, \
                            instrument=self.instrument, coffset=geoManager.coffset, clenEpics=self.clenEpics, \
-                           tag=self.tag, pkTag = self.pkTag, pdbfile=self.pdbfile, indexnoe=self.noe)
+                           tag=self.tag, pkTag = self.pkTag, pdbfile=self.pdbfile, indexnoe=self.indexnoe)
         
         return cmd 
         
