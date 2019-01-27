@@ -91,9 +91,9 @@ class peakFinderHelper:
     	self.algorithm = 2
         self.alg_npix_min = 2
         self.alg_npix_max = 30
-        self.alg_amax_thr = 100
-        self.alg_atot_thr = 300
-        self.alg_son_min = 7
+        self.alg_amax_thr = 300
+        self.alg_atot_thr = 600
+        self.alg_son_min = 9
         self.alg1_thr_low = 0.
         self.alg1_thr_high = 0.
         self.alg1_rank = 3
