@@ -23,7 +23,7 @@ class experiparams:
         self.cxiDir = self.outDir+'/r'+str(self.runNumber).zfill(4)
         self.logDir = self.outDir+'/logs/r'+str(self.runNumber).zfill(4)
         self.runDir = self.cxiDir
-        
+
 
     def setDefaultPsana(self):
         try: 
