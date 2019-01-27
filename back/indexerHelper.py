@@ -106,6 +106,9 @@ class GeoFileManager:
         if fromfile is None:
             fromfile = self.geomfile
 
+        print "##### old geom: ", fromfile
+        print "##### old params: distance=%f / coffset=%f / clen=%f"%(self.detectorDistance, self.coffset, self.clen) 
+
         self.detectorDistance = newDistance
         self.coffset = self.detectorDistance - self.clen 
 
@@ -121,9 +124,6 @@ class GeoFileManager:
         f.close()
 
         self.geomfile = tofile 
-
-        print "##### old geom: ", fromfile
-        print "##### old params: distance=%f / coffset=%f / clen=%f"%(self.detectorDistance, self.coffset, self.clen) 
 
         print "##### new geom: ", tofile
         print "##### new params: distance=%f / coffset=%f / clen=%f"%(self.detectorDistance, self.coffset, self.clen) 
