@@ -7,7 +7,7 @@ parser.add_argument("-run", "--run", help="run number", default=-1, type=int)
 parser.add_argument("-det", "--det", help="detector alias (e.g. DscCsPad)", default="DscCsPad", type=str) 
 parser.add_argument("-pkTag", "--pkTag", help="tag of cxi file", default="", type=str) 
 parser.add_argument("-noe", "--noe", help="number of images", default=-1, type=int)
-parser.add_argument("-distance", "--distance", help="distance + or - in mm", default=None, nargs=argparse.PARSER)
+parser.add_argument("-distance", "--distance", help="distance + or - in mm", default=None, type=unescaped_str)
 parser.add_argument("-pdb", "--pdb", help="pdb", default=None, type=str)
 args = parser.parse_args()
 
