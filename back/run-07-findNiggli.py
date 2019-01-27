@@ -17,7 +17,7 @@ args.pdb = args.pdb in ["true", "yes", '1']
 for streamfile in out:
     if not os.path.isfile(streamfile):
         continue
-    indexHistogram = getIndexHistogram(streamfile)
+    indexHistogram = ei.getIndexHistogram(streamfile)
     lattice = indexHistogram[:,9:15].copy() 
 
     print "##### streamfile: ", streamfile
