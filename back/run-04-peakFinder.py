@@ -1,5 +1,5 @@
 import peakfinderHelper as pfHelper
-import subprocess as sp 
+import subprocess 
 import argparse
 parser = argparse.ArgumentParser()
 parser.add_argument("-exp", "--exp", help="experiment name", default="", type=str)
@@ -16,4 +16,8 @@ pf.setAdaptiveMode()
 pf.pkTag = args.pkTag
 pf.noe = args.noe
 
-print pf.getCommand()
+command = pf.getCommand()
+print " #####\n", command, "\n ######"
+
+process = subprocess.Popen(, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
+out, err = process.communicate()
