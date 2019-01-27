@@ -7,7 +7,7 @@ from expParams import experiparams
 
 def checkStartFiles(experimentName, runNumber):
     copyParams = experiparams(experimentName=experimentName, runNumber=runNumber)
-    cxiDir = params.cxiDir
+    cxiDir = copyParams.cxiDir
 
     status = True
     if cxiDir is None or not os.path.exists(cxiDir):
