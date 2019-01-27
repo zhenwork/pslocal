@@ -69,7 +69,7 @@ class GeoFileManager:
         if fromfile is None:
             fromfile = self.params.cxiDir + "/.temp.geom"
         if tofile is None:
-            tofile = self.input + "-newCoffset-"+str(newCoffset)
+            tofile = fromfile + "-newCoffset-"+str(newCoffset)
         if fromfile is None:
             fromfile = self.geomfile
             
@@ -102,7 +102,7 @@ class GeoFileManager:
         if fromfile is None:
             fromfile = self.params.cxiDir + "/.temp.geom"
         if tofile is None:
-            tofile = self.input + "-newDistance-"+str(newDistance)
+            tofile = fromfile + "-newDistance-"+str(newDistance)
         if fromfile is None:
             fromfile = self.geomfile
 
