@@ -26,7 +26,7 @@ class peakFinderHelper:
         
         ## mask params
         self.staticMask = params.cxiDir+'/staticMask.h5'
-        self.userMask = params.cxiDir + "/psanaMask.npy"
+        self.userMask_path = None
         
         ## other params
         self.clen = params.clen
@@ -43,7 +43,7 @@ class peakFinderHelper:
             " -q " + str(self.queue) + \
             " -n " + str(self.ncpus) + \
             " -o " + str(self.logFile) + \
-            " mpirun findPeaks" + \
+            " mpirun findPeaks " + \
             " -e " + str(self.experimentName) + \
             " -r " + str(self.runNumber) + \
             " -d " + str(self.detectorName) + \
@@ -67,7 +67,6 @@ class peakFinderHelper:
             " --psanaMask_unbond " + "True" + \
             " --psanaMask_unbondnrs " + "True" + \
             " --mask " + str(self.staticMask) + \
-            " --userMask_path " + str(self.userMask) + \
             " --noe " + str(self.noe) + \
             " --clen " + str(self.clen) + \
             " --coffset " + str(self.coffset) + \
@@ -81,6 +80,9 @@ class peakFinderHelper:
             " --detectorDistance " + str(self.detectorDistance) + \
             " --access ana" + \
             " --tag " + self.pkTag
+
+        if self.userMask_path is not None:
+            command += " --userMask_path " + str(self.userMask_path) 
             
         return command
 
