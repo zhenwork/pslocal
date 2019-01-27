@@ -28,7 +28,7 @@ if args.distance is not None:
         geoM = None
         indH = None
 
-        process = subprocess.Popen(shlex.split(cmd))
+        process = subprocess.Popen(shlex.split(command))
 else:
     geoM = indexerHelper.GeoFileManager(experimentName=args.exp,runNumber=args.run,detectorName=args.det)
     geoM.changeDistance(geoM.detectorDistance)
@@ -41,6 +41,6 @@ else:
     geoM = None
     indH = None
 
-    process = subprocess.Popen(shlex.split(cmd))
+    process = subprocess.Popen(shlex.split(command))
     #process.communicate()
     #jobname = params.experimentName + "_" + str(params.runNumber) + "*" + params.tag
