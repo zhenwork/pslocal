@@ -137,6 +137,7 @@ class IndexHelper:
         self.experimentName = experimentName
         self.runNumber = runNumber
         self.detectorName = detectorName 
+        self.setDefaultParams()
         
     def setDefaultParams(self):
         params = experiparams(self.experimentName, self.runNumber, detectorName=self.detectorName)
