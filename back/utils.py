@@ -4,6 +4,7 @@
 import time
 import shlex
 import datetime
+import psana
 
 
 def getTime():
@@ -23,3 +24,19 @@ def guessStreamMedian(prior_guess, current):
 	haven't implemented this
 	"""
 	return prior_guess
+
+def loadPsanaMask(experimentName, runNumber, detectorName):
+    ds = psana.DataSource("exp="+experimentName+":run="+str(runNumber)+':idx') 
+    det = psana.Detector(detectorName)
+    det.do_reshape_2d_to_3d(flag=True)
+
+    run = ds.runs().next()
+    times = run.times()
+    evt = None
+    counter = 0
+    while evt is None:
+        evt = run.event(times[counter])
+        counter += 1
+    unassem_img = det.mask(runNumber, calib=True,status=True,edges=True,central=True,unbond=True,unbondnbrs=True)
+    assem_img = det.image(evt, unassem_img)
+    return unassem_img, assem_img
