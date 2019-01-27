@@ -150,6 +150,7 @@ class IndexHelper:
         self.instrument = params.instrument
         self.pixelSize = params.pixelSize 
         self.pdbfile = None
+        self.clenEpics = params.clenEpics
 
 
     def indexCommand(self, geoManager):
