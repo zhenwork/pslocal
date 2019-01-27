@@ -29,6 +29,7 @@ for streamfile in out:
         print "##### numIndex after filter: ", len(lattice)
 
     nuc = np.nanmean(lattice,axis=0).reshape((1,6))
-    nuc = convert2niggli(nuc).ravel()
+    print "##### average cell: ", nuc
+    nuc = ei.convert2niggli(nuc).ravel()
     print "##### niggli cell: ", nuc
 
