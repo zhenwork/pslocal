@@ -27,7 +27,7 @@ def indexCommand(experimentName=None, runNumber=None, detectorName=None, geomfil
             " --chunkSize " + str(chunkSize) + \
             " --noe " + str(indexnoe) + \
             " --instrument " + instrument + \
-            " --pixelSize " + str(pixelsize) + \
+            " --pixelSize " + str(pixelSize) + \
             " --coffset " + str(coffset) + \
             " --clenEpics " + clenEpics + \
             " --logger " + str(logger) + \
