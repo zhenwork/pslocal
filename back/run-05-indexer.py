@@ -13,7 +13,7 @@ args = parser.parse_args()
 
 
 if args.distance is not None:
-    args.distance = args.distance.split(',') 
+    detectorDistanceList = args.distance.split(',') 
     for detectorDistanceString in detectorDistanceList:
         geoM = indexerHelper.GeoFileManager(experimentName=args.exp,runNumber=args.run,detectorName=args.det)
         detectorDistance = geoM.detectorDistance + float(detectorDistanceString)*1.0e-3
