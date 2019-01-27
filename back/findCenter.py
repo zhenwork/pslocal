@@ -117,9 +117,9 @@ def getCorr(A,B):
 
 
 def psanaCenter(experimentName, runNumber, detectorName):
-	"""
-	load current center from psana
-	"""
+    """
+    load current center from psana
+    """
     ds = psana.DataSource("exp="+experimentName+":run="+str(runNumber)+':idx')
     run = ds.runs().next()
     det = psana.Detector(detectorName)
@@ -136,11 +136,11 @@ def psanaCenter(experimentName, runNumber, detectorName):
 
 
 def findCenterPowderSum(_powderImg, _mask=None):
-	"""
-	optimize the center with the powderSum pattern
-	"""
-	if _mask is not None:
-		powderImg = _powderImg * _mask
+    """
+    optimize the center with the powderSum pattern
+    """
+    if _mask is not None:
+        powderImg = _powderImg * _mask
  
     matrixCx = (powderImg.shape[0]-1.)/2.
     matrixCy = (powderImg.shape[1]-1.)/2.
@@ -156,13 +156,13 @@ def findCenterPowderSum(_powderImg, _mask=None):
 
 
 def findCenterSilverBehenate(_silverBehenateImage, _pixelSize, _waveLength, _mask=None):
-	"""
-	_silverBehenateImage: diffraction pattern of silver Behenate
-	_pixelSize: in meter
-	_waveLength: in meter
-	# estimate distance and center
-	"""
-	return (optimalCx, optimalCy, optimalCz)
+    """
+    _silverBehenateImage: diffraction pattern of silver Behenate
+    _pixelSize: in meter
+    _waveLength: in meter
+    # estimate distance and center
+    """
+    return (optimalCx, optimalCy, optimalCz)
 
 
 def deployCenter(experimentName, runNumber, detectorName, newCx, newCy):
