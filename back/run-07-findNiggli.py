@@ -12,7 +12,7 @@ process = subprocess.Popen("find "+args.stream, stdout=subprocess.PIPE, stderr=s
 out, err = process.communicate()
 out = out.split('\n')
 
-args.pdb = args.pdb in ["true", "yes", '1']
+args.pdb = args.pdb.lower() in ["true", "yes", '1']
 
 for streamfile in out:
     if not os.path.isfile(streamfile):
