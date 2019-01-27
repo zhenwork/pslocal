@@ -48,3 +48,4 @@ class experiparams:
         self.detectorDistance = np.mean(det.coords_z(evt))*1.0e-6
         self.coffset = self.detectorDistance - self.clen
         self.pixelSize = det.pixel_size(run)*1.0e-6
+

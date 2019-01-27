@@ -5,7 +5,7 @@ import time
 import shlex
 import datetime
 import psana
-
+import numpy as np 
 
 def getTime():
     """
@@ -40,3 +40,7 @@ def loadPsanaMask(experimentName, runNumber, detectorName):
     unassem_img = det.mask(runNumber, calib=True,status=True,edges=True,central=True,unbond=True,unbondnbrs=True)
     assem_img = det.image(evt, unassem_img)
     return unassem_img, assem_img
+
+def latticeVolume(ila, ilb, ilc, ialpha, ibeta, igamma):
+	volume = ila*ilb*ilc*np.sqrt(1+2.*np.cos(ialpha)*np.cos(ibeta)*np.cos(igamma)-np.cos(ialpha)**2-np.cos(ibeta)**2-np.cos(igamma)**2)
+	return volume
