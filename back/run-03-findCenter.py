@@ -1,3 +1,4 @@
+import os
 import findCenter as fc 
 import numpy as np 
 import argparse
