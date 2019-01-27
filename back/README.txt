@@ -43,7 +43,7 @@ python run-05-indexer.py --exp cxic0415 --run 100 --det DscCsPad --pdb /path/to/
 @@ use cxic0415_*.stream to evaluate all stream files
 
 source /reg/g/cctbx/conda_build/build/setpaths.sh 
-python run-06-optimizeDistance.py --stream " /path/to/r0100/cxic0415_0100_index-distance-*.stream " 
+python run-06-optimizeDistance.py --stream " /path/to/r0100/cxic0415_0100_index-distance-*.stream-psocake " 
 
 
 
@@ -52,5 +52,5 @@ python run-06-optimizeDistance.py --stream " /path/to/r0100/cxic0415_0100_index-
 ==============================================================================
 ## find niggli unit cell from stream file
 source /reg/g/cctbx/conda_build/build/setpaths.sh
-python run-07-findNiggli.py --stream " /path/to/r0100/cxic0415_0100_index-distance-*.stream "
+python run-07-findNiggli.py --stream " /path/to/r0100/cxic0415_0100_index-distance-*.stream-psocake "
 
