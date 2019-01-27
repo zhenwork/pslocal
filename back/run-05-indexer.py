@@ -24,6 +24,8 @@ if args.distance is not None:
         indH.pdbfile = args.pdb 
         command = indH.indexCommand(geoM)
         print " #####\n", command, "\n ######"
+        geoM = None
+        indH = None
 else:
     geoM = indexerHelper.GeoFileManager(experimentName=args.exp,runNumber=args.run,detectorName=args.det)
     indH = indexerHelper.IndexHelper(experimentName, runNumber, detectorName)

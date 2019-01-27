@@ -55,9 +55,9 @@ class GeoFileManager:
     def loadPsanaGeo(self):
         self.params = experiparams(self.experimentName, self.runNumber, detectorName=self.detectorName)
         self.params.setDefaultPsana() 
-        self.detectorDistance = params.detectorDistance
-        self.coffset = params.coffset
-        self.clen = params.clen 
+        self.detectorDistance = self.params.detectorDistance
+        self.coffset = self.params.coffset
+        self.clen = self.params.clen 
 
     def changeCenter(self, fromfile=None, newCenter=None, tofile=None):
         if tofile is None:
