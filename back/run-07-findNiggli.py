@@ -25,7 +25,7 @@ for streamfile in out:
     print "##### numIndex/numHits: ", len(lattice),'/',numHits 
     if args.pdb:
         lattice = ei.convert2niggli(lattice)
-        [lattice, Volume] = volumeFilter(lattice)
+        [lattice, Volume] = ei.volumeFilter(lattice)
         print "##### numIndex after filter: ", len(lattice)
 
     nuc = np.nanmean(lattice,axis=0).reshape((1,6))
