@@ -24,7 +24,7 @@ for streamfile in out:
     print "##### with pdb? ", args.pdb
     print "##### numIndex: ", len(lattice) 
     if args.pdb:
-        lattice = convert2niggli(lattice)
+        lattice = ei.convert2niggli(lattice)
         [lattice, Volume] = volumeFilter(lattice)
         print "##### numIndex after filter: ", len(lattice)
 
