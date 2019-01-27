@@ -143,6 +143,7 @@ class IndexHelper:
         self.queue = 'psanaq' 
         ### TODO: psocake accept former directory as outDir
         self.outDir = params.outDir
+        ### TODO: indexnoe is actually not implemented in psocake
         self.indexnoe = -1
         self.pkTag = ""
         self.instrument = params.instrument
