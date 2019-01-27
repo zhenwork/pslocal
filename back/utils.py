@@ -22,4 +22,4 @@ def guessStreamMedian(prior_guess, current):
 	"""
 	haven't implemented this
 	"""
-	return prev_guess
+	return prior_guess
