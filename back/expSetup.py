@@ -135,7 +135,7 @@ def findPsanaGeometry(experimentName, runNumber, detectorName):
     return calibFile
 
 
-def convertCalibFile(calibFile, fsave):
+def CalibFileToGeomFile(calibFile, detectorName, fsave):
     # Read the geometry file and save it to temp.geom file in the setup folder
     from psgeom import camera
     if 'cspad' in detectorName.lower():
@@ -180,7 +180,7 @@ def setupNewRun(experimentName=None, runNumber=None, detectorName=None, copyRun=
     ############################
     # Sometimes the geom file is not compatible with psocake, we need to modify a little bit
     fgeom = params.cxiDir+"/temp.geom"
-    convertCalibFile(calibFile, fgeom)
+    CalibFileToGeomFile(calibFile, detectorName, fgeom)
     print "##### convert calibFile to geometry file"
 
     ## load geom file and make a copy to .temp.geom
