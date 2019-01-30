@@ -48,7 +48,7 @@ def evaluateSkewKurt(a,b,c,alpha,beta,gamma):
     skewness = [None]*6
     kurtosis = [None]*6
     
-    if len(a) < 50:
+    if len(a) < 20:
         return None, None
     
     skewness[0] = stats.skew(a)
@@ -145,8 +145,8 @@ def evaluateIndexing(streamfile, withpdb=True):
         [lattice, Volume] = volumeFilter(lattice)
 
     skewness, kurtosis = evaluateSkewKurt(lattice[:,0], lattice[:,1], lattice[:,2], lattice[:,3], lattice[:,4], lattice[:,5])
-    print "##### skewness: ", np.around(skewness,3) 
-    print "##### kurtosis: ", np.around(kurtosis,3)
+    print "##### skewness: ", None if skewness is None else np.around(skewness,3) 
+    print "##### kurtosis: ", None if kurtosis is None else np.around(kurtosis,3)
     score = scoreIndexing(skewness, kurtosis, indexRate=numIndex*1.0/numHits)
     
     return score
