@@ -77,7 +77,7 @@ def volumeFilter(_lattice):
     (nx,ny) = lattice.shape
     if nx < 20: 
         print "@@@@@ no enough crystals" 
-        return lattice
+        return [lattice, None]
 
     Volume = []
     for ii in range(nx):
@@ -97,7 +97,7 @@ def volumeFilter(_lattice):
     index = np.where((Volume > Vcenter*0.9)*(Volume < Vcenter*1.1) == True)
     if len(index[0]) < 5:
         print "@@@@@ no enough crystals" 
-        return lattice
+        return [lattice, None]
 
     lattice = lattice[index].copy()
     print '##### volume filtering: ori -> now: ', nx,'->',len(lattice)
