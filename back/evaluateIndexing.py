@@ -40,7 +40,7 @@ def scoreIndexing(skewness, kurtosis, indexRate=None):
     if skewness is None or kurtosis is None:
         return [score]*6  
     score = kurtosis/2. - np.abs(skewness) 
-    score = np.sum(score) + indexRate*20.
+    score = np.sum(score[:3]) + indexRate*40.
     return score 
 
 
