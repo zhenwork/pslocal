@@ -134,6 +134,18 @@ def convert2niggli(_lattice):
 	return niggliLattice
 
 
+def check90(_lattice):
+    lattice = _lattice.copy()
+    for idx, each in enumerate(_lattice):
+        if np.abs(each[3]-90)<1.5:
+            lattice[idx, 3] = 90
+        if np.abs(each[4]-90)<1.5:
+            lattice[idx, 4] = 90
+        if np.abs(each[5]-90)<1.5:
+            lattice[idx, 5] = 90
+    return lattice
+
+
 def evaluateIndexing(streamfile, withpdb=True):
     
     numIndex, numHits, indexHistogram = getIndexHistogram(streamfile)
@@ -142,6 +154,7 @@ def evaluateIndexing(streamfile, withpdb=True):
     print "##### numIndex: ", len(lattice)
     if not withpdb:
         print "##### running niggli and volume filter"
+        lattice = check90(lattice)
     	lattice = convert2niggli(lattice)
         [lattice, Volume] = volumeFilter(lattice)
 

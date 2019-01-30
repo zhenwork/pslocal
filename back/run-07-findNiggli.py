@@ -23,8 +23,9 @@ for streamfile in out:
     print "##### streamfile: ", streamfile
     print "##### with pdb? ", args.pdb
     print "##### numIndex/numHits: ", len(lattice),'/',numHits 
-    if args.pdb:
+    if not args.pdb:
         print lattice[:10], '\n'
+        lattice = ei.check90(lattice)
         lattice = ei.convert2niggli(lattice)
         print lattice[:10], '\n'
         [lattice, Volume] = ei.volumeFilter(lattice)
