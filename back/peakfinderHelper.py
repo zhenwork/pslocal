@@ -29,7 +29,7 @@ class peakFinderHelper:
         self.userMask_path = None
         
         ## other params
-        self.clen = params.clen
+        self.clen = params.clenEpics
         self.coffset = params.coffset 
         self.instrument = params.instrument
         self.pixelSize = params.pixelSize 
