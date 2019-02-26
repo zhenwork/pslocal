@@ -29,6 +29,9 @@ if args.distance is not None:
         indH = None
 
         process = subprocess.Popen(shlex.split(command))
+        """
+        Submit without waiting
+        """
 else:
     geoM = indexerHelper.GeoFileManager(experimentName=args.exp,runNumber=args.run,detectorName=args.det)
     geoM.changeDistance(geoM.detectorDistance)

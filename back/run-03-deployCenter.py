@@ -9,6 +9,6 @@ parser.add_argument("-cy", "--cy", help="center y", default=None, type=float)
 args = parser.parse_args()
 
 if args.cx is None or args.cy is None:
-	print "##### No input new center"
+    print "##### No input new center"
 
 fc.deployCenter(experimentName=args.exp, runNumber=args.run, detectorName=args.det, newCx=args.cx, newCy=args.cy)

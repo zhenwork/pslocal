@@ -107,31 +107,31 @@ def volumeFilter(_lattice):
     
 
 def niggli(unitCell, spacegroup):
-	from cctbx import uctbx
-	from cctbx import crystal
-	uc  =  uctbx.unit_cell( unitCell )      # "51 98 53 89.5 68.3 89.9"
-	xs  =  crystal.symmetry(uc, spacegroup) # "P21"
-	cbop_prim = xs.change_of_basis_op_to_niggli_cell()
-	xs1 = xs.change_basis(cbop_prim)
-	a = str(xs1.unit_cell().parameters()).split('(')[-1].split(')')[0].split(',')
-	nuc = np.zeros(6,)
-	for i in range(6):
-		nuc[i] = float(a[i])
-	return nuc
+    from cctbx import uctbx
+    from cctbx import crystal
+    uc  =  uctbx.unit_cell( unitCell )      # "51 98 53 89.5 68.3 89.9"
+    xs  =  crystal.symmetry(uc, spacegroup) # "P21"
+    cbop_prim = xs.change_of_basis_op_to_niggli_cell()
+    xs1 = xs.change_basis(cbop_prim)
+    a = str(xs1.unit_cell().parameters()).split('(')[-1].split(')')[0].split(',')
+    nuc = np.zeros(6,)
+    for i in range(6):
+        nuc[i] = float(a[i])
+    return nuc
 
 
 def convert2niggli(_lattice):
-	lattice = _lattice.copy()
-	niggliLattice = lattice.copy()
+    lattice = _lattice.copy()
+    niggliLattice = lattice.copy()
 
-	spacegroup = "P1"
-	for i, val in enumerate(lattice):
-		unitCell = ""
-		for j in lattice[i,:]:
-			unitCell += str(j) + " "
-		nuc = niggli(unitCell, spacegroup)
-		niggliLattice[i,:] = nuc.copy()
-	return niggliLattice
+    spacegroup = "P1"
+    for i, val in enumerate(lattice):
+        unitCell = ""
+        for j in lattice[i,:]:
+            unitCell += str(j) + " "
+        nuc = niggli(unitCell, spacegroup)
+        niggliLattice[i,:] = nuc.copy()
+    return niggliLattice
 
 
 def check90(_lattice):
@@ -155,7 +155,7 @@ def evaluateIndexing(streamfile, withpdb=True):
     if not withpdb:
         print "##### running niggli and volume filter"
         lattice = check90(lattice)
-    	lattice = convert2niggli(lattice)
+        lattice = convert2niggli(lattice)
         [lattice, Volume] = volumeFilter(lattice)
 
     skewness, kurtosis = evaluateSkewKurt(lattice[:,0], lattice[:,1], lattice[:,2], lattice[:,3], lattice[:,4], lattice[:,5])

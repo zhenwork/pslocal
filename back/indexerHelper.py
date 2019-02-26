@@ -150,6 +150,7 @@ class IndexHelper:
         self.pixelSize = params.pixelSize 
         self.pdbfile = None
         self.clenEpics = params.clenEpics
+        self.likelihood = 0.
 
 
     def indexCommand(self, geoManager):
@@ -157,7 +158,7 @@ class IndexHelper:
         
         cmd = indexCommand(experimentName=self.experimentName, runNumber=self.runNumber, \
                            detectorName=self.detectorName, geomfile=geoManager.geomfile, \
-                           outDir=self.outDir, queue=self.queue, pixelSize=self.pixelSize, \
+                           outDir=self.outDir, queue=self.queue, pixelSize=self.pixelSize, likelihood=self.likelihood, \
                            instrument=self.instrument, coffset=geoManager.coffset, clenEpics=self.clenEpics, \
                            tag=self.tag, pkTag = self.pkTag, pdbfile=self.pdbfile, indexnoe=self.indexnoe)
         

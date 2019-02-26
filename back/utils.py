@@ -42,5 +42,5 @@ def loadPsanaMask(experimentName, runNumber, detectorName):
     return unassem_img, assem_img
 
 def latticeVolume(ila, ilb, ilc, ialpha, ibeta, igamma):
-	volume = ila*ilb*ilc*np.sqrt(1+2.*np.cos(ialpha)*np.cos(ibeta)*np.cos(igamma)-np.cos(ialpha)**2-np.cos(ibeta)**2-np.cos(igamma)**2)
-	return volume
+    volume = ila*ilb*ilc*np.sqrt(1+2.*np.cos(ialpha)*np.cos(ibeta)*np.cos(igamma)-np.cos(ialpha)**2-np.cos(ibeta)**2-np.cos(igamma)**2)
+    return volume

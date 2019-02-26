@@ -88,7 +88,7 @@ class peakFinderHelper:
 
 
     def setAdaptiveMode(self):
-    	self.algorithm = 2
+        self.algorithm = 2
         self.alg_npix_min = 2
         self.alg_npix_max = 30
         self.alg_amax_thr = 300
