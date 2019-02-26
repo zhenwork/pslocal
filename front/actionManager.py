@@ -106,7 +106,7 @@ class ActionManager:
             self.updateStatus("running")
         elif "exit" in err.lower() or "exit" in out.lower():
             self.updateStatus("exit")
-        elif "terminate" in err.lower() or "terminate" in out.lower()::
+        elif "terminate" in err.lower() or "terminate" in out.lower():
             self.updateStatus("exit")
         else:
             self.updateStatus("done") 
