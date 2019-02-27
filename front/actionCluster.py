@@ -53,6 +53,57 @@ class ExpSetup:
             self.params["status"] = "exit"
         return
 
+class ExampleLocal:
+    def __init__(self, actionParams):
+        self.params = actionParams
+    def start(self):
+        self.params["status"] = "running"
+        self.params["output"] = {}
+        try:
+            assert self.params["mode"].lower() == "local"
+
+            experimentName = self.params["experimentName"]
+            runNumber = self.params["runNumber"]
+            detectorName = self.params["detectorName"]
+            
+            cmd = "python ./test-pipeline.py "
+
+            process = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
+            out, err = process.communicate()
+            self.params["output"]["out"] = out 
+            self.params["output"]["err"] = err
+            self.params["status"] = "complete"
+            process = None
+        except:
+            self.params["status"] = "exit"
+        return
+
+
+class ExampleLaunch:
+    def __init__(self, actionParams):
+        self.params = actionParams
+    def start(self):
+        self.params["status"] = "running"
+        self.params["output"] = {}
+        try:
+            assert self.params["mode"].lower() == "local"
+
+            experimentName = self.params["experimentName"]
+            runNumber = self.params["runNumber"]
+            detectorName = self.params["detectorName"]
+            
+            cmd = "bsub -q psdebugq -x -n 1 -R "span[ptile=1]" -J %s -o %J.out python ./test-pipeline.py " % self.params["jobName"]
+
+            process = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
+            out, err = process.communicate()
+            self.params["output"]["out"] = out 
+            self.params["output"]["err"] = err
+            self.params["status"] = "complete"
+            process = None
+        except:
+            self.params["status"] = "exit"
+        return
+
 
 class PowderSum:
     def __init__(self, actionParams):
