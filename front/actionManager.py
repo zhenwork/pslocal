@@ -18,6 +18,7 @@ tag: unique tag
 timeStamp:
 status: waiting/running/complete -> running/done/exit
 """
+
 class ActionManager:
 
     def __init__(self, actionName=None, actionID=None, params={}):
@@ -56,7 +57,7 @@ class ActionManager:
         elif self.params["mode"].lower() == "local":
             return self.checkStatusLocal()
         elif self.params["mode"].lower() == "launch":
-            return self.checkStatusServer(self, jobID=self.actionParams["jobID"], jobName=self.actionParams["jobName"])
+            return self.checkStatusServer(jobID=self.actionParams["jobID"], jobName=self.actionParams["jobName"])
         else:
             return None
 

@@ -5,7 +5,7 @@ import sys
 import time
 import shlex
 import datetime
-import utils as utils
+import utils
 import fileManager
 import subprocess 
 
@@ -87,7 +87,7 @@ class ExampleLaunch:
         self.params["status"] = "running"
         output = {}
         try:
-            assert self.params["mode"].lower() == "local"
+            assert self.params["mode"].lower() == "launch"
 
             experimentName = self.params["experimentName"]
             runNumber = self.params["runNumber"]
