@@ -129,13 +129,28 @@ class ActionManager:
     def checkStatusServer(self, jobID=None, jobName=None):
         ## no job id, no job name
         if jobID is None and jobName is None:
+            print "testing"
             return None
 
+        if self.actionParams["status"] == "exit":
+            self.updateStatus("exit")
+            return {"status":self.status, "completeness":0, "log":{"out":self.actionParams["output"]["out"], "err":self.actionParams["output"]["err"]}}
+        elif self.actionParams["status"] == "running":
+            self.updateStatus("running")
+            return {"status":self.status, "completeness":0, "log":{"out":None, "err":None}}
+        else:
+            pass 
+            
         ## with job id
         if jobID is not None:
+            print "using jobID", jobID
+
             cmd = "bjobs -d | grep ps " + str(jobID)
             process = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
             out, err = process.communicate()
+            
+            print out,err
+
             if "done" in out.lower():
                 self.updateStatus("done")
                 return {"status":self.status, "completeness":100, "log":{"out":out, "err":err}}
@@ -149,10 +164,13 @@ class ActionManager:
         # with jobName
         if jobName is not None: 
             ## check in completed jobs
+            print "using jobname", jobName
             cmd = 'bjobs -J ' + '*\"' + jobName + '\"*' + ' -d | grep ps'
             process = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
             out, err = process.communicate()
             process = None
+
+            print out,err
 
             if "exit" in out:
                 self.updateStatus("exit")

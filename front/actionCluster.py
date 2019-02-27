@@ -75,7 +75,8 @@ class ExampleLocal:
             self.params["output"] = output.copy()
             self.params["status"] = "complete"
             process = None
-        except:
+        except Exception as err:
+            self.params["output"] = {"out":None, "err":err}
             self.params["status"] = "exit"
         return
 
@@ -93,19 +94,22 @@ class ExampleLaunch:
             runNumber = self.params["runNumber"]
             detectorName = self.params["detectorName"]
             
-            cmd = 'bsub -q psdebugq -x -n 1 -R "span[ptile=1]" -J %s -o %J.out python ./test-pipeline.py ' % self.params["jobName"]
+            cmd = 'bsub -q psdebugq -x -n 1 -R "span[ptile=1]" -J %s -o %J.out python ./test-pipeline.py' % self.params["jobName"]
+
+            self.params["output"] = {"cmd":cmd}
 
             process = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
             out, err = process.communicate()
             output["out"] = out 
             output["err"] = err
-            
+
             time.sleep(3)
             self.params["jobID"] = utils.getJobID(out)
             self.params["output"] = output.copy()
             self.params["status"] = "complete"
             process = None
-        except:
+        except Exception as err:
+            self.params["output"] = {"out":None, "err":err}
             self.params["status"] = "exit"
         return
 
