@@ -140,12 +140,12 @@ class ActionManager:
             return {"status":self.status, "completeness":0, "log":{"out":None, "err":None}}
         else:
             pass 
-            
+
         ## with job id
         if jobID is not None:
             print "using jobID", jobID
 
-            cmd = "bjobs -d | grep ps " + str(jobID)
+            cmd = "bjobs -d | grep " + str(jobID)
             process = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
             out, err = process.communicate()
             
