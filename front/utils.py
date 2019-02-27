@@ -27,3 +27,10 @@ def mergeDict(old=None, new=None):
         old[item] = new[item]
 
     return old
+
+
+def getJobID(out):
+    if "<" not in out or ">" not in out:
+        return None
+    else:
+        return out.split("<")[1].split(">")[0]

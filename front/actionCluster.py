@@ -58,7 +58,7 @@ class ExampleLocal:
         self.params = actionParams
     def start(self):
         self.params["status"] = "running"
-        self.params["output"] = {}
+        output = {}
         try:
             assert self.params["mode"].lower() == "local"
 
@@ -70,8 +70,9 @@ class ExampleLocal:
 
             process = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
             out, err = process.communicate()
-            self.params["output"]["out"] = out 
-            self.params["output"]["err"] = err
+            output["out"] = out
+            output["err"] = err
+            self.params["output"] = output.copy()
             self.params["status"] = "complete"
             process = None
         except:
@@ -84,7 +85,7 @@ class ExampleLaunch:
         self.params = actionParams
     def start(self):
         self.params["status"] = "running"
-        self.params["output"] = {}
+        output = {}
         try:
             assert self.params["mode"].lower() == "local"
 
@@ -96,8 +97,10 @@ class ExampleLaunch:
 
             process = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
             out, err = process.communicate()
-            self.params["output"]["out"] = out 
-            self.params["output"]["err"] = err
+            output["out"] = out 
+            output["err"] = err
+            self.params["jobID"] = utils.getJobID(out)
+            self.params["output"] = output.copy()
             self.params["status"] = "complete"
             process = None
         except:

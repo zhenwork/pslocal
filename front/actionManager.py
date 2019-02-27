@@ -51,7 +51,7 @@ class ActionManager:
 
     def checkActionStatus(self):
         if self.status == "exit" or self.status=="done":
-            return {"status":self.status, "completeness":0, "log":(out,err)}
+            return {"status":self.status, "completeness":0, "log":(None,None)}
         elif self.params["mode"].lower() == "local":
             return self.checkStatusLocal()
         elif self.params["mode"].lower() == "launch":
@@ -106,7 +106,7 @@ class ActionManager:
             return {"status":status, "completeness":0, "log":(None,None)}
 
         output = self.actionParams["output"]
-        if not "out" in output or not "err" in output: 
+        if not "out" in output or not "err" in output:
             return {"status":status, "completeness":0, "log":(None,None)}
 
         out = output["out"]
