@@ -120,6 +120,8 @@ class ActionManager:
             self.updateStatus("exit")
         elif "terminate" in err.lower() or "terminate" in out.lower():
             self.updateStatus("exit")
+        elif len(err)>1:
+            self.updateStatus("exit")
         else:
             self.updateStatus("done") 
 

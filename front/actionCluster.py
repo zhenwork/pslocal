@@ -8,7 +8,7 @@ import datetime
 import utils
 import fileManager
 import subprocess 
-
+fm = fileManager.OtherFileManager()
 
 def actionObject(actionName):
     return getattr(sys.modules[__name__], actionName)
@@ -40,6 +40,8 @@ class ExpSetup:
             cmd = "python ../back/run-01-expSetup.py "+ \
                 utils.argsToCommand(self.params, item=["experimentName", "runNumber", "detectorName", "copyRun"], \
                                     _iter=["exp", "run", "det", "copyRun"])
+
+            fm.save_json({"cmd":cmd}, "~/logger.log")
 
             process = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
             out, err = process.communicate()
