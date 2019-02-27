@@ -45,11 +45,12 @@ class ExpSetup:
             out, err = process.communicate()
             output["out"] = out
             output["err"] = err
+            output["cmd"] = cmd
             self.params["output"] = output.copy()
             self.params["status"] = "complete"
             process = None
         except Exception as err:
-            self.params["output"] = {"out":None, "err":err}
+            self.params["output"] = {"out":None, "err":str(err)}
             self.params["status"] = "exit"
         return
 
@@ -77,7 +78,7 @@ class ExampleLocal:
             self.params["status"] = "complete"
             process = None
         except Exception as err:
-            self.params["output"] = {"out":None, "err":err}
+            self.params["output"] = {"out":None, "err":str(err)}
             self.params["status"] = "exit"
         return
 
@@ -110,7 +111,7 @@ class ExampleLaunch:
             self.params["status"] = "complete"
             process = None
         except Exception as err:
-            self.params["output"] = {"out":None, "err":err}
+            self.params["output"] = {"out":None, "err":str(err)}
             self.params["status"] = "exit"
         return
 
