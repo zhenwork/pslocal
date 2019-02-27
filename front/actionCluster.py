@@ -50,7 +50,7 @@ class ExpSetup:
             self.params["status"] = "complete"
             process = None
         except Exception as err:
-            self.params["output"] = {"out":None, "err":str(err)}
+            self.params["output"] = {"out":"", "err":str(err)}
             self.params["status"] = "exit"
         return
 
@@ -78,7 +78,7 @@ class ExampleLocal:
             self.params["status"] = "complete"
             process = None
         except Exception as err:
-            self.params["output"] = {"out":None, "err":str(err)}
+            self.params["output"] = {"out":"", "err":str(err)}
             self.params["status"] = "exit"
         return
 
@@ -98,6 +98,8 @@ class ExampleLaunch:
             
             cmd = 'bsub -q psdebugq -x -n 1 -R "span[ptile=1]" -J ' + self.params["jobName"] + ' -o %J.out python ./test-pipeline.py'
 
+            print "cmd", cmd
+
             process = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
             out, err = process.communicate()
             output["out"] = out 
@@ -111,7 +113,7 @@ class ExampleLaunch:
             self.params["status"] = "complete"
             process = None
         except Exception as err:
-            self.params["output"] = {"out":None, "err":str(err)}
+            self.params["output"] = {"out":"", "err":str(err)}
             self.params["status"] = "exit"
         return
 
