@@ -33,25 +33,26 @@ class ExpSetup:
         self.params = actionParams
     def start(self):
         self.params["status"] = "running"
-        self.params["output"] = {}
+        output = {}
         try:
             assert self.params["mode"].lower() == "local"
 
-            experimentName = self.params["experimentName"]
-            runNumber = self.params["runNumber"]
-            detectorName = self.params["detectorName"]
-            
-            cmd = "python ../back/run-01-expSetup.py --exp %s --run %d --det %s"%(experimentName, runNumber, detectorName)
+            cmd = "python ../back/run-01-expSetup.py "+ \
+                utils.argsToCommand(self.params, item=["experimentName", "runNumber", "detectorName", "copyRun"], \
+                                    _iter=["exp", "run", "det", "copyRun"])
 
             process = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
             out, err = process.communicate()
-            self.params["output"]["out"] = out 
-            self.params["output"]["err"] = err
+            output["out"] = out
+            output["err"] = err
+            self.params["output"] = output.copy()
             self.params["status"] = "complete"
             process = None
-        except:
+        except Exception as err:
+            self.params["output"] = {"out":None, "err":err}
             self.params["status"] = "exit"
         return
+
 
 class ExampleLocal:
     def __init__(self, actionParams):
@@ -101,7 +102,7 @@ class ExampleLaunch:
             output["out"] = out 
             output["err"] = err
             output["cmd"] = cmd
-            
+
             time.sleep(3)
 
             self.params["jobID"] = utils.getJobID(out)
