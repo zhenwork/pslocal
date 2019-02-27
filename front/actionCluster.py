@@ -94,16 +94,16 @@ class ExampleLaunch:
             runNumber = self.params["runNumber"]
             detectorName = self.params["detectorName"]
             
-            cmd = 'bsub -q psdebugq -x -n 1 -R "span[ptile=1]" -J %s -o %J.out python ./test-pipeline.py' % self.params["jobName"]
-
-            self.params["outp"] = {"cmd":cmd}
+            cmd = 'bsub -q psdebugq -x -n 1 -R "span[ptile=1]" -J ' + self.params["jobName"] + ' -o %J.out python ./test-pipeline.py'
 
             process = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
             out, err = process.communicate()
             output["out"] = out 
             output["err"] = err
-
+            output["cmd"] = cmd
+            
             time.sleep(3)
+
             self.params["jobID"] = utils.getJobID(out)
             self.params["output"] = output.copy()
             self.params["status"] = "complete"
