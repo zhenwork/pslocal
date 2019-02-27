@@ -34,6 +34,7 @@ class ActionManager:
         self.actionParams = utils.mergeDict(old=self.actionParams, new=self.params)
         self.actionParams["jobName"] = "%s-%s"%(self.actionName, self.actionID)
         self.actionParams["jobID"] = None
+        self.actionParams["status"] = "waiting"
 
 
     def start(self):
@@ -98,13 +99,19 @@ class ActionManager:
 
 
     def checkStatusLocal(self): 
-        out = self.actionParams["output"]["out"]
-        err = self.actionParams["output"]["err"]
-        status = self.actionName["status"]
 
-        if status == 'running':
-            self.updateStatus("running")
-        elif "exit" in err.lower() or "exit" in out.lower():
+        status = self.actionParams["status"]
+        if status == 'running' or status == "waiting":
+            self.updateStatus(status)
+            return {"status":status, "completeness":0, "log":(None,None)}
+
+        output = self.actionParams["output"]
+        if not "out" in output or not "err" in output: 
+            return {"status":status, "completeness":0, "log":(None,None)}
+
+        out = output["out"]
+        err = output["err"]
+        if "exit" in err.lower() or "exit" in out.lower():
             self.updateStatus("exit")
         elif "terminate" in err.lower() or "terminate" in out.lower():
             self.updateStatus("exit")
