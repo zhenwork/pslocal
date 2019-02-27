@@ -57,7 +57,10 @@ class ActionManager:
         elif self.params["mode"].lower() == "local":
             return self.checkStatusLocal()
         elif self.params["mode"].lower() == "launch":
-            return self.checkStatusServer(jobID=self.actionParams["jobID"], jobName=self.actionParams["jobName"])
+            if self.actionParams["status"] == "complete":
+                return self.checkStatusServer(jobID=self.actionParams["jobID"], jobName=self.actionParams["jobName"])
+            else:
+                return {"status":"running", "completeness":0, "log":{"out":None, "err":None}}
         else:
             return None
 
@@ -129,7 +132,7 @@ class ActionManager:
             return None
 
         ## with job id
-        if self.jobID is not None:
+        if jobID is not None:
             cmd = "bjobs -d | grep ps " + str(jobID)
             process = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
             out, err = process.communicate()
@@ -144,7 +147,7 @@ class ActionManager:
                 return {"status":self.status, "completeness":100, "log":{"out":out, "err":err}}
         
         # with jobName
-        if self.jobName is not None: 
+        if jobName is not None: 
             ## check in completed jobs
             cmd = 'bjobs -J ' + '*\"' + jobName + '\"*' + ' -d | grep ps'
             process = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)

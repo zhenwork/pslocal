@@ -99,6 +99,8 @@ class ExampleLaunch:
             out, err = process.communicate()
             output["out"] = out 
             output["err"] = err
+            
+            time.sleep(3)
             self.params["jobID"] = utils.getJobID(out)
             self.params["output"] = output.copy()
             self.params["status"] = "complete"
