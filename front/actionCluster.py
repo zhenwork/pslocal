@@ -96,7 +96,7 @@ class ExampleLaunch:
             
             cmd = 'bsub -q psdebugq -x -n 1 -R "span[ptile=1]" -J %s -o %J.out python ./test-pipeline.py' % self.params["jobName"]
 
-            self.params["output"] = {"cmd":cmd}
+            self.params["outp"] = {"cmd":cmd}
 
             process = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
             out, err = process.communicate()
