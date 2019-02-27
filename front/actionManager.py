@@ -35,6 +35,7 @@ class ActionManager:
         self.actionParams["jobName"] = "%s-%s"%(self.actionName, self.actionID)
         self.actionParams["jobID"] = None
         self.actionParams["status"] = "waiting"
+        
 
 
     def start(self):
@@ -51,7 +52,7 @@ class ActionManager:
 
     def checkActionStatus(self):
         if self.status == "exit" or self.status=="done":
-            return {"status":self.status, "completeness":0, "log":(None,None)}
+            return {"status":self.status, "completeness":0, "log":self.actionParams["output"]}
         elif self.params["mode"].lower() == "local":
             return self.checkStatusLocal()
         elif self.params["mode"].lower() == "launch":
@@ -102,12 +103,12 @@ class ActionManager:
 
         status = self.actionParams["status"]
         if status == 'running' or status == "waiting":
-            self.updateStatus(status)
-            return {"status":status, "completeness":0, "log":(None,None)}
+            self.updateStatus("running")
+            return {"status":"running", "completeness":0, "log":{"out":None, "err":None}}
 
         output = self.actionParams["output"]
         if not "out" in output or not "err" in output:
-            return {"status":status, "completeness":0, "log":(None,None)}
+            return {"status":status, "completeness":0, "log":{"out":None, "err":None}}
 
         out = output["out"]
         err = output["err"]
@@ -118,7 +119,7 @@ class ActionManager:
         else:
             self.updateStatus("done") 
 
-        return {"status":self.status, "completeness":0, "log":(out,err)}
+        return {"status":self.status, "completeness":0, "log":self.actionParams["output"]}
 
 
     def checkStatusServer(self, jobID=None, jobName=None):
@@ -133,13 +134,13 @@ class ActionManager:
             out, err = process.communicate()
             if "done" in out.lower():
                 self.updateStatus("done")
-                return {"status":self.status, "completeness":100, "log":(out,err)}
+                return {"status":self.status, "completeness":100, "log":{"out":out, "err":err}}
             elif len(out) == 0:
                 self.updateStatus("running")
-                return {"status":self.status, "completeness":0, "log":(out,err)}
+                return {"status":self.status, "completeness":0, "log":{"out":out, "err":err}}
             else:
                 self.updateStatus("exit")
-                return {"status":self.status, "completeness":100, "log":(out,err)}
+                return {"status":self.status, "completeness":100, "log":{"out":out, "err":err}}
         
         # with jobName
         if self.jobName is not None: 
@@ -151,7 +152,7 @@ class ActionManager:
 
             if "exit" in out:
                 self.updateStatus("exit")
-                return {"status":self.status, "completeness":0, "log":(out,err)}
+                return {"status":self.status, "completeness":0, "log":{"out":out, "err":err}}
 
             ## check in incomplete jobs
             cmd = 'bjobs -J ' + '*\"' + jobName + '\"*' + ' | grep ps'
@@ -161,7 +162,7 @@ class ActionManager:
 
             if len(out) == 0:
                 self.updateStatus("done")
-                return {"status":self.status, "completeness":100, "log":(out,err)}
+                return {"status":self.status, "completeness":100, "log":{"out":out, "err":err}}
             else:
                 self.updateStatus("running")
-                return {"status":self.status, "completeness":0, "log":(out,err)}            
+                return {"status":self.status, "completeness":0, "log":{"out":out, "err":err}}            
