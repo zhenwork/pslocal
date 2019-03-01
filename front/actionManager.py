@@ -116,16 +116,16 @@ class ActionManager:
 
         out = output["out"]
         err = output["err"]
-        if "exit" in err.lower() or "exit" in out.lower():
+        if self.actionParams["status"] != "complete":
+            self.updateStatus("exit")
+        elif "exit" in err.lower() or "exit" in out.lower():
             self.updateStatus("exit")
         elif "terminate" in err.lower() or "terminate" in out.lower():
-            self.updateStatus("exit")
-        elif len(err)>1:
             self.updateStatus("exit")
         else:
             self.updateStatus("done") 
 
-        return {"status":self.status, "completeness":0, "log":self.actionParams["output"]}
+        return {"status":status, "completeness":0, "log":self.actionParams["output"]}
 
 
     def checkStatusServer(self, jobID=None, jobName=None):
