@@ -19,7 +19,7 @@ timeStamp:
 status: waiting/running/complete -> running/done/exit
 """
 
-class ActionManager:
+class ActionManager(multiprocessing.Process):
 
     def __init__(self, actionName=None, actionID=None, params={}):
         self.params = params.copy()
@@ -33,7 +33,8 @@ class ActionManager:
             self.actionID = utils.getTime() 
 
         self.actionParams = utils.mergeDict(old=self.actionParams, new=self.params)
-        self.actionParams["jobName"] = "%s-%s"%(self.actionName, self.actionID)
+        if "jobName" not in self.actionParams:
+            self.actionParams["jobName"] = "%s-%s"%(self.actionName, self.actionID)
         self.actionParams["jobID"] = None
         self.actionParams["status"] = "waiting"
         
@@ -47,6 +48,7 @@ class ActionManager:
 
         ## process the action
         self.updateStatus("running")
+        print "starting jobs"
         self.launchAction()
         return 
 
@@ -92,9 +94,11 @@ class ActionManager:
     def launchAction(self):
         try:
             actionObject = getattr(actionCluster, self.actionName)(self.actionParams)
+
             p = multiprocessing.Process(target=actionObject.start, args=())
             p.start()
             p = None
+            print "submitted"
             self.updateStatus("running")
             return True
         except Exception as err: 
@@ -145,13 +149,13 @@ class ActionManager:
 
         ## with job id
         if jobID is not None:
-            print "using jobID", jobID
+            #print "using jobID", jobID
 
             cmd = "bjobs -d | grep " + str(jobID)
             process = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
             out, err = process.communicate()
             
-            print out,err
+            # print out,err
 
             if "done" in out.lower():
                 self.updateStatus("done")
@@ -166,13 +170,13 @@ class ActionManager:
         # with jobName
         if jobName is not None: 
             ## check in completed jobs
-            print "using jobname", jobName
+            #print "using jobname", jobName
             cmd = 'bjobs -J ' + '*\"' + jobName + '\"*' + ' -d | grep ps'
             process = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
             out, err = process.communicate()
             process = None
 
-            print out,err
+            #print out,err
 
             if "exit" in out:
                 self.updateStatus("exit")

@@ -52,6 +52,7 @@ def argsToCommand(args, item=None, _iter=None):
         for idx, each in enumerate(item):
             if each in args and args[each] is not None:
                 command += " --"+str(_iter[idx])+" "+str(args[each])
+        return command
     else:
         return command
 

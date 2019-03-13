@@ -10,6 +10,7 @@ parser.add_argument("-pkTag", "--pkTag", help="tag of cxi file", default="", typ
 parser.add_argument("-noe", "--noe", help="number of images", default=-1, type=int)
 parser.add_argument("-distance", "--distance", help="distance + or - in mm", default=None, type=str)
 parser.add_argument("-pdb", "--pdb", help="pdb", default=None, type=str)
+parser.add_argument("-tag", "--tag", help="index tag", default="", type=str)
 args = parser.parse_args()
 
 
@@ -23,6 +24,7 @@ if args.distance is not None:
         indH.pkTag = args.pkTag
         indH.indexnoe = args.noe 
         indH.pdbfile = args.pdb 
+        indH.tag = args.tag
         command = indH.indexCommand(geoM)
         print " #####\n", command, "\n ######"
         geoM = None
@@ -39,6 +41,7 @@ else:
     indH.pkTag = args.pkTag 
     indH.indexnoe = args.noe 
     indH.pdbfile = args.pdb 
+    indH.tag = args.tag
     command = indH.indexCommand(geoM)
     print " #####\n", command, "\n ######"
     geoM = None

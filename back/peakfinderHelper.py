@@ -17,6 +17,7 @@ class peakFinderHelper:
         self.outDir = params.cxiDir
         self.logFile = params.cxiDir+"/.%J.log"
         self.noe = -1
+        self.jobName = "%s-r%4d"%(params.experimentName, params.runNumber)
 
         ## peak finder algorithm params
         self.minPeaks = 15
@@ -43,6 +44,7 @@ class peakFinderHelper:
             " -q " + str(self.queue) + \
             " -n " + str(self.ncpus) + \
             " -o " + str(self.logFile) + \
+            " -J " + str(self.jobName) + \
             " mpirun findPeaks " + \
             " -e " + str(self.experimentName) + \
             " -r " + str(self.runNumber) + \

@@ -2,6 +2,8 @@ import numpy as np
 import copy 
 from expParams import experiparams
 import os
+import utils
+
 
 def indexCommand(experimentName=None, runNumber=None, detectorName=None, geomfile=None, outDir=None, \
                  queue=None, pixelSize=None, instrument=None, coffset=None, clenEpics=None, \
@@ -151,10 +153,9 @@ class IndexHelper:
         self.pdbfile = None
         self.clenEpics = params.clenEpics
         self.likelihood = 0.
-
+        self.tag = "index-"+utils.getTime()
 
     def indexCommand(self, geoManager):
-        self.tag = "index-distance-"+str(round(geoManager.detectorDistance*1000., 2)) 
         
         cmd = indexCommand(experimentName=self.experimentName, runNumber=self.runNumber, \
                            detectorName=self.detectorName, geomfile=geoManager.geomfile, \
